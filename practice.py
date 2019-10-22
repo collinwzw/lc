@@ -60,3 +60,37 @@ class Solution:
             dp[i] = max(nums[i],dp[i-1])
         print(dp)
         return dp[len(dp) - 1]
+
+    #Merge Inteval
+
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        if len(intervals) == 0:
+            return []
+        s_stack = []
+        e_stack = []
+
+        intervals.sort(key = lambda x:x[0])
+        
+        ans = []
+        
+        s_stack.append(intervals[0][0])
+        e_stack.append(intervals[0][1])       
+        for i in range(1,len(intervals)):
+            if intervals[i][0] <= e_stack[len(e_stack) -1]:
+                if intervals[i][1] > e_stack[len(e_stack) -1]:
+                    e_stack.pop()
+                    e_stack.append(intervals[i][1])
+                else:
+                    continue
+            else:
+                s_stack.append(intervals[i][0])
+                e_stack.append(intervals[i][1])
+        
+        for i in range(0,len(e_stack)):
+            ans.append([s_stack[i],e_stack[i]])
+
+        
+        
+        return ans
+                    
+                    
