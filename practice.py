@@ -49,3 +49,14 @@ class Solution:
                     l += 1; r -= 1
         return res
 
+    #Maximum subarray
+    def maxSubArray(self, nums: List[int]) -> int:
+        dp = [-sys.maxsize for x in range(0,len(nums))]
+        
+        dp[0] = nums[0]
+        for i in range(1,len(nums) ):
+            if nums[i-1] > 0:
+                nums[i] += nums[i-1]
+            dp[i] = max(nums[i],dp[i-1])
+        print(dp)
+        return dp[len(dp) - 1]
