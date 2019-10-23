@@ -163,7 +163,7 @@ class Solution:
                 # Rule 4
                 if copy_board[row][col] == 0 and live_neighbors == 3:
                     board[row][col] = 1
-#122. Best Time to Buy and Sell Stock II
+#121. Best Time to Buy and Sell Stock I
     def maxProfit(self, prices: List[int]) -> int:
         profit = 0
         minimum = sys.maxsize
@@ -175,4 +175,14 @@ class Solution:
             if price - minimum > profit:
                 profit = price - minimum
         
+        return profit
+        
+#122. Best Time to Buy and Sell Stock II
+    def maxProfit(self, prices: List[int]) -> int:
+        profit = 0
+         
+        for i in range(1,len(prices)):
+            if prices[i] > prices[i-1]:
+                profit += (prices[i] - prices[i -1])
+                
         return profit
