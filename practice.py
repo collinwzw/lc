@@ -92,5 +92,38 @@ class Solution:
         
         
         return ans
+        
+#973. K Closest Points to Origin
+
+    def calculate_dis_square(point):
+        return point[0]**2 + point[1]**2
+    
+    def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:
+        hashtable = {}
+        for point in points:
+            distance = Solution.calculate_dis_square(point)
+            if distance in hashtable.keys():
+                temp = hashtable.get(distance)
+                temp.append(point)
+                hashtable.update({distance: temp})
+            else:    
+                hashtable.update({distance: [point]})
+            
+        dis_list = hashtable.keys()
+        #print(dis_list)
+        sorted_dis_list = sorted(dis_list)
+        #print(sorted_dis_list)
+        ans = []
+        for i in range(0,K):
+         #   print(hashtable.keys())
+            if len(hashtable.get(sorted_dis_list[i])) == 1:
+                ans.append(hashtable.get(sorted_dis_list[i])[0])
+            else:
+                for element in hashtable.get(sorted_dis_list[i]):
+                    ans.append(element)
+                    #print(ans)
+                if len(ans) == K:
+                    return ans
+        return ans
                     
                     
