@@ -207,3 +207,20 @@ class Solution:
                     queue.append((element, curr_level + 1))
         
         return ans
+
+#139. Word Break
+
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        d = set()
+        for element in wordDict:
+            d.add(element)
+            
+        ans = [False for x in range(0, len(s)+1)]
+        ans[0] = True       
+        for i in range(1, len(s) + 1):
+            for j in range(0,i):
+                if ans[j] == True and s[j:i] in d:
+                    ans[i]  =  True
+                    break
+            print(ans)
+        return ans[len(s)]
