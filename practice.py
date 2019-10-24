@@ -176,7 +176,7 @@ class Solution:
                 profit = price - minimum
         
         return profit
-        
+
 #122. Best Time to Buy and Sell Stock II
     def maxProfit(self, prices: List[int]) -> int:
         profit = 0
@@ -186,3 +186,24 @@ class Solution:
                 profit += (prices[i] - prices[i -1])
                 
         return profit
+
+
+#429. N-ary Tree Level Order Traversal
+    def levelOrder(self, root: 'Node') -> List[List[int]]:
+        ans = []
+        queue = collections.deque([])
+        
+        if root == None:
+            return []
+        queue.append((root,0))
+        while len(queue) > 0:
+            (curr_node, curr_level) = queue.popleft()
+            if len(ans) < curr_level + 1:
+                ans.append([curr_node.val])
+            else:
+                ans[curr_level].append(curr_node.val)
+            for element in curr_node.children:
+                if element != None:
+                    queue.append((element, curr_level + 1))
+        
+        return ans
